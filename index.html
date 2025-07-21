@@ -15,20 +15,19 @@
     <p>Type a few sentences and the AI will guess the topic.</p>
     <textarea id="input" placeholder="Write something..."></textarea>
     <div id="guess">Topic: <span id="topic">(waiting for input)</span></div>
+
     <script>
-        // Instead of checking keywords, just grab a snippet of the input text.
+        // Return up to the first 30 characters of the trimmed input.
         function getSegment(text) {
             const trimmed = text.trim();
-            // Show up to the first 30 characters of the text
-            return trimmed.slice(0, 30);
+            return trimmed.slice(0, 30) || '(waiting for input)';
         }
 
-        const input = document.getElementById('input');
+        const input   = document.getElementById('input');
         const topicEl = document.getElementById('topic');
 
         input.addEventListener('input', () => {
-            const segment = input.value.trim() ? getSegment(input.value) : '(waiting for input)';
-            topicEl.textContent = segment;
+            topicEl.textContent = getSegment(input.value);
         });
     </script>
 </body>
