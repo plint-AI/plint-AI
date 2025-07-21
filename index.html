@@ -15,32 +15,19 @@
     <p>Type a few sentences and the AI will guess the topic.</p>
     <textarea id="input" placeholder="Write something..."></textarea>
     <div id="guess">Topic: <span id="topic">(waiting for input)</span></div>
-    <script>
-        const keywordTopics = [
-            { topic: 'Programming', keywords: ['code', 'javascript', 'python', 'programming', 'developer'] },
-            { topic: 'Movies', keywords: ['movie', 'film', 'actor', 'director', 'cinema'] },
-            { topic: 'Music', keywords: ['music', 'song', 'band', 'album', 'melody'] },
-            { topic: 'Sports', keywords: ['sport', 'game', 'team', 'player', 'score'] },
-        ];
 
-        function guessTopic(text) {
-            const lower = text.toLowerCase();
-            for (const entry of keywordTopics) {
-                for (const key of entry.keywords) {
-                    if (lower.includes(key)) {
-                        return entry.topic;
-                    }
-                }
-            }
-            return 'Unknown';
+    <script>
+        // Return up to the first 30 characters of the trimmed input.
+        function getSegment(text) {
+            const trimmed = text.trim();
+            return trimmed.slice(0, 30) || '(waiting for input)';
         }
 
-        const input = document.getElementById('input');
+        const input   = document.getElementById('input');
         const topicEl = document.getElementById('topic');
 
         input.addEventListener('input', () => {
-            const topic = input.value.trim() ? guessTopic(input.value) : '(waiting for input)';
-            topicEl.textContent = topic;
+            topicEl.textContent = getSegment(input.value);
         });
     </script>
 </body>

@@ -4,5 +4,6 @@ The main repository for the Plint AI project.
 
 ## Getting Started
 
-Open `index.html` in your browser. Type a short text in the box and the page
-will attempt to guess what topic you're writing about.
+
+Open `index.html` in your browser. As you type in the box, the page displays a
+short segment of your text instead of relying on a list of keywords.
