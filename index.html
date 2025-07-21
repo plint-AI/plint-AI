@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plint AI Topic Guesser</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 2em auto; }
+        textarea { width: 100%; height: 150px; }
+        #guess { font-weight: bold; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Plint AI Topic Guesser</h1>
+    <p>Type a few sentences and the AI will guess the topic.</p>
+    <textarea id="input" placeholder="Write something..."></textarea>
+    <div id="guess">Topic: <span id="topic">(waiting for input)</span></div>
+    <script>
+        const keywordTopics = [
+            { topic: 'Programming', keywords: ['code', 'javascript', 'python', 'programming', 'developer'] },
+            { topic: 'Movies', keywords: ['movie', 'film', 'actor', 'director', 'cinema'] },
+            { topic: 'Music', keywords: ['music', 'song', 'band', 'album', 'melody'] },
+            { topic: 'Sports', keywords: ['sport', 'game', 'team', 'player', 'score'] },
+        ];
+
+        function guessTopic(text) {
+            const lower = text.toLowerCase();
+            for (const entry of keywordTopics) {
+                for (const key of entry.keywords) {
+                    if (lower.includes(key)) {
+                        return entry.topic;
+                    }
+                }
+            }
+            return 'Unknown';
+        }
+
+        const input = document.getElementById('input');
+        const topicEl = document.getElementById('topic');
+
+        input.addEventListener('input', () => {
+            const topic = input.value.trim() ? guessTopic(input.value) : '(waiting for input)';
+            topicEl.textContent = topic;
+        });
+    </script>
+</body>
+</html>
