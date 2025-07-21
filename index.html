@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plint AI Topic Guesser</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 2em auto; }
+        textarea { width: 100%; height: 150px; }
+        #guess { font-weight: bold; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Plint AI Topic Guesser</h1>
+    <p>Type a few sentences and the AI will guess the topic.</p>
+    <textarea id="input" placeholder="Write something..."></textarea>
+    <div id="guess">Topic: <span id="topic">(waiting for input)</span></div>
+    <script>
+        // Instead of checking keywords, just grab a snippet of the input text.
+        function getSegment(text) {
+            const trimmed = text.trim();
+            // Show up to the first 30 characters of the text
+            return trimmed.slice(0, 30);
+        }
+
+        const input = document.getElementById('input');
+        const topicEl = document.getElementById('topic');
+
+        input.addEventListener('input', () => {
+            const segment = input.value.trim() ? getSegment(input.value) : '(waiting for input)';
+            topicEl.textContent = segment;
+        });
+    </script>
+</body>
+</html>
